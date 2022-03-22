@@ -16,16 +16,16 @@ def app():
         # Every form must have a submit button.
         submitted = st.form_submit_button("Submit")
         if submitted:
-            with open(uploaded_file.name, "wb") as f:
+            with open(os.path.join("/home/appuser/", uploaded_file.name), "wb") as f:
                 f.write((uploaded_file).getbuffer())
             st.success("File Saved")
     
-    reader = iio.get_reader(uploaded_file.name, format="FFMPEG")
+    reader = iio.get_reader(os.path.join("/home/appuser/", uploaded_file.name), format="FFMPEG")
     writer = []
     for im in reader:
         writer.append(im)
-    iio.mimsave('converted.gif',writer, duration=10)
-    with open("converted.gif","rb") as file:
+    iio.mimsave(os.path.join("/home/appuser/", "converted.gif"),writer, duration=10)
+    with open(os.path.join("/home/appuser/", "converted.gif"),"rb") as file:
         btn = st.download_button(
             label = "Download GIF",
             data=file,
