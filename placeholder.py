@@ -24,7 +24,7 @@ def app():
     writer = []
     for im in reader:
         writer.append(im)
-    iio.mimsave('converted.gif',writer)
+    iio.mimsave('converted.gif',writer, duration=10)
     with open("converted.gif","rb") as file:
         btn = st.download_button(
             label = "Download GIF",
